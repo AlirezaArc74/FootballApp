@@ -1,38 +1,109 @@
-.App {
-  text-align: center;
+.border {
+  border: 1px solid rgb(214, 211, 214);
+  border-radius: 8px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.bg {
+  background-color: rgb(56, 56, 58);
+  background-size: cover;
+  width: 56rem;
+  height: 100%;
+  overflow: scroll;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+  background-color: rgb(115, 115, 124);
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.rectangle {
+  height: 80px;
+  width: 35px;
+  animation-name: bigger;
+  background-color: red;
+  animation-duration: 2s;
 }
 
-.App-link {
-  color: #61dafb;
+.changeWidth:hover .rectangle {
+  width: 45px;
+  transition: .5s;
+  
+}
+.changeWidth:hover .changeTextColor{
+  color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.background{
+  /* background-size: auto; */
+  background-image: url('./img/arena.jpeg');
+  background-size: cover;
+  background-position: center;
+  width: 100;
+  height: 100vh;
+  background-repeat: no-repeat;
 }
+
+.backgroundEditTeam{
+  /* background-size: auto; */
+  background-image: url('./img/stadium.webp');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+}
+
+.pep {
+  background-image: url('./img/pep.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+table, th, td {
+  border: 1px solid;
+}
+table {
+  background-color: slategrey;
+}
+
+.selected{
+  background-color: red;
+}
+
+.anotherclass:hover {
+  background-color: rgb(216, 160, 160);
+  cursor: pointer;
+}
+
+.text {
+  color: rgb(112, 146, 146);
+}
+
+.txt:hover {
+  color: aliceblue;
+}
+
+.over {
+  overflow: scroll;
+}
+
+.round {
+  /* border: 1px solid ; */
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+
+}
+
+/* .pep-opacity {
+  background-image: url('./img/pep.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  opacity: .5;
+} */
