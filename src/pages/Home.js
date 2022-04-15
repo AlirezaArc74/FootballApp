@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import bg from "../img/stadium.webp";
 import "../App.css";
-import Header from "../components/Header";
+import Header from "../pages/Header";
 
 const Home = () => {
   return (

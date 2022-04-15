@@ -28,7 +28,7 @@ const Header = () => {
             </button>
           </Link>
         </div>
-        <Link to={"/dashboard"}>
+        <Link to={"/dashboard/login"}>
           <div className="flex justify-end   ">
             <button className="absolute top-[1.5rem] mr-8 border p-2 hover:bg-gray-300 hover:text-slate-800">
               Dashboard

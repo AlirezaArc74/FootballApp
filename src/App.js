@@ -1,23 +1,24 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Teams from "./components/Teams";
-import Home from "./components/Home";
-import Players from "./components/Players";
-import Couches from "./components/Couches";
-import NoPage from "./components/NoPage";
-import { UserContextProvider } from "./components/UserContext";
-import Dashbourd from "./components/Dashbourd";
+import Teams from "./pages/Teams";
+import Home from "./pages/Home";
+import Players from "./pages/Players";
+import Couches from "./pages/Couches";
+import NoPage from "./pages/NoPage";
+import { UserContextProvider } from "./pages/UserContext";
+import Dashbourd from "./pages/Dashbourd";
 import { useState } from "react";
-import EditTeam from "./components/EditTeam";
-import TeamControl from "./components/TeamControl";
-import AddTeam from "./components/AddTeam";
-import PlayerControl from "./components/PlayerControl";
-import EditPlayer from "./components/EditPlayer";
-import AddPlayer from "./components/AddPlayer";
-import CouchControl from "./components/CouchControl";
-import AddCouch from "./components/AddCouch";
-import EditCouch from "./components/EditCouch";
-import TeamsId from "./components/TeamsId";
+import EditTeam from "./pages/EditTeam";
+import TeamControl from "./pages/TeamControl";
+import AddTeam from "./pages/AddTeam";
+import PlayerControl from "./pages/PlayerControl";
+import EditPlayer from "./pages/EditPlayer";
+import AddPlayer from "./pages/AddPlayer";
+import CouchControl from "./pages/CouchControl";
+import AddCouch from "./pages/AddCouch";
+import EditCouch from "./pages/EditCouch";
+import TeamsId from "./pages/TeamsId";
+import Login from "./pages/Login";
 const App = () => {
   return (
     <>
@@ -42,6 +43,7 @@ const App = () => {
               <Route path="editplayer/:id" element={<EditPlayer />} />
               <Route path="editcouch/:id" element={<EditCouch />} />
             </Route>
+            <Route path="dashboard/login" element={<Login/>} />
           </Routes>
         </Router>
       </UserContextProvider>

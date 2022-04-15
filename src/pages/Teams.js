@@ -11,56 +11,22 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { useNavigate } from "react-router-dom";
-import 'charts.css';
-
-
-am4core.useTheme(am4themes_animated);
+import "charts.css";
+import Modal from "../components/Modal";
 
 const Teams = () => {
-  const { teams, findTeamById } = useContext(UserContext);
+  const { teams, findTeamById, chosenTeam, setChosenTeam, liverpoolTeam } =
+    useContext(UserContext);
   const [searchInput, setSearchInput] = useState("");
   const [selectInput, setSelectInput] = useState("");
   const [showTeam, setShowTeam] = useState(false);
-  const [chosenTeam, setChosenTeam] = useState();
-  const chart = useRef(null);
+  const [attack, setAttack] = useState()
 
   const navigate = useNavigate();
 
-  // useLayoutEffect(() => {
-  //   let x = am4core.create("chartdiv", am4charts.XYChart);
-  //   x.paddingRight = 20;
-
-  //   let data = [
-  //     {
-  //       country: "Alireza",
-  //       value: 1,
-  //     },
-  //     {
-  //       country: "narges",
-  //       value: 2,
-  //     },
-  //   ];
-
-  //   x.data = data;
-
-  //   let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-  //   categoryAxis.x.data.category = "country";
-
-  //   let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-
-  //   let series = chart.series.push(new am4charts.RadarSeries());
-  //   series.dataFields.valueY = "litres";
-  //   series.dataFields.categoryX = "country";
-  //   series.name = "Sales";
-  //   series.strokeWidth = 3;
-
-  //   chart.current = x;
-
-  //   return () => {
-  //     x.dispose();
-  //   };
-  // }, []);
-  // console.log(teams)
+  const overAll = Math.trunc(
+    (chosenTeam?.attack + chosenTeam?.midfield + chosenTeam?.defense) / 3
+  );
 
   const clickToshowTeam = (id) => {
     const p = teams.findIndex((item) => item.id === id);
@@ -68,7 +34,13 @@ const Teams = () => {
     setShowTeam(true);
   };
 
-  console.log(chosenTeam?.id);
+  // {chosenTeam?.map(item => {
+  //   if(item?.position?.includes('Forward')) {
+  //     return console.log(item)
+  //   }
+  // })}
+
+  console.log(chosenTeam);
   return (
     <>
       {/* <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div> */}
@@ -80,7 +52,7 @@ const Teams = () => {
               .includes(searchInput.toLowerCase());
           })
           .filter((item) => {
-            return item.teamType.includes(selectInput);
+            return item?.teamType?.includes(selectInput);
           })
           .map((item) => (
             <div
@@ -98,8 +70,16 @@ const Teams = () => {
             </div>
           ))}
       </div>
+      <div className="">
+        <b>
+          <h1 className=" relative top-[3rem] ml-[26rem] text-slate-100 ">
+            Select A Team To Read Details
+          </h1>
+        </b>
+        <Modal />
+      </div>
 
-      <div className="bg-slate-400 absolute right-0 w-[20rem] top-[5.6rem] mr-2 h-[30rem] opacity-80 ">
+      <div className="bg-slate-700 absolute right-0 w-[20rem] top-[5.6rem] mr-2 h-[30rem] opacity-80 ">
         <b>
           <h1 className="text-[20px] mt-4 text-center">Find Your Team</h1>
         </b>
@@ -133,7 +113,7 @@ const Teams = () => {
               <b>
                 <h1 className="text-[17px] mt-4">{chosenTeam.teamName}</h1>
               </b>
-              <div className="mt-[3rem] leading-9	  ">
+              <div className="mt-[1.5rem] leading-7	w-[10rem] text-[13px] ">
                 <h1> Country: {chosenTeam.teamCountry} </h1>
                 <h1> Home Stadium: {chosenTeam.teamStaidum} </h1>
                 <h1> Date Of Foundation: {chosenTeam.Founded} </h1>
@@ -141,12 +121,62 @@ const Teams = () => {
               </div>
             </div>
             <button
-              className="mt-8 p-2 rounded-tr-3xl	rounded-br-3xl	 bg-sky-400"
+              className="mt-8 p-2 rounded-tr-3xl	rounded-br-3xl
+               hover:text-sky-400 hover:bg-slate-600	 bg-sky-400"
               onClick={() => navigate(`/teams/${chosenTeam.id}`)}
             >
               Go To Team Page
             </button>
-            
+            <div className="absolute text-slate-300 w-[18.6rem] top-8 right-3">
+              <div className="flex justify-between">
+                <b>
+                  <label>ATACK</label>
+                </b>
+                <b>
+                  <label> {chosenTeam.attack} </label>
+                </b>
+              </div>
+              <input
+                readOnly="true"
+                type="range"
+                value={chosenTeam.attack}
+                className="attackRange"
+                max="120"
+              />
+
+              <div className="flex justify-between">
+                <b>
+                  <label>MIDFIELD</label>
+                </b>
+                <b>
+                  <label> {chosenTeam.midfield} </label>
+                </b>
+              </div>
+              <input
+                readOnly="true"
+                type="range"
+                value={chosenTeam.midfield}
+                className="midfieldRange"
+                max="120"
+              />
+
+              <div className="flex justify-between">
+                <b>
+                  <label>DEFENSE</label>
+                </b>
+                <b>
+                  <label> {chosenTeam.defense} </label>
+                </b>
+              </div>
+              <input
+                readOnly="true"
+                type="range"
+                value={chosenTeam.defense}
+                className="defenseRange"
+                max="120"
+              />
+              <h1> Overall: {overAll} </h1>
+            </div>
           </div>
         </>
       ) : null}

@@ -36,16 +36,11 @@ const EditTeam = () => {
     setTeamTypeInput(thisTeam.teamType);
     setTeamLogoInput(thisTeam.logoUrl);
     setTeamFoundedInput(thisTeam.Founded);
-    console.log(thisTeam);
+    // console.log(thisTeam);
   }, []);
 
   // console.log(findTeamById(id))
   const saveChange = () => {
-    // const arr2 = [...liverpoolTeam];
-    // arr2.push({
-    //   name: nameInput,
-    // });
-    // setLiverpoolTeam(arr2.team);
     const arr = findTeamById(id);
     arr.teamName = nameInput;
     arr.teamCountry = countryInput;
@@ -62,33 +57,22 @@ const EditTeam = () => {
       arr.Founded
     );
   };
-  console.log(nameInput);
+  // console.log(nameInput);
 
-  const chooePlayer = (i) => {
-    const p = liverpoolTeam.findIndex((item) => item.id == i);
-    if (p === -1) return null;
-    const arr = [...chosenPlayer];
-    arr.push(liverpoolTeam[p]);
-    setChosenPlayer(arr);
-    liverpoolTeam[i].isSelected = !liverpoolTeam[i].isSelected;
-    console.log(chosenPlayer);
+  const chooePlayerClick = (id) => {
+    const p = liverpoolTeam.findIndex(item => item.id === id)
+    console.log(liverpoolTeam[p].isSelected)
+    const arr = [...liverpoolTeam]
+    arr.push({
+      isSelected: true
+    })
+    setLiverpoolTeam(arr)
+    liverpoolTeam[p].isSelected = !liverpoolTeam[p].isSelected
   };
-  console.log(chosenPlayer)
-  // liverpoolTeam.map(item => {
-  //   if( item.isSelected == true) {
-  //     const arr = [...chosenPlayer]
-  //     arr.push(item)
-  //     setChosenPlayer(arr)
-  //   }
   
-  // })
-
-  // console.log(findTeamById(id));
+  // console.log(chosenPlayer)
+  
   if (hasError) return <h1> no such team found</h1>;
-
-  // const maxNumber = 200;
-  // const randomNumber = Math.floor(Math.random() * maxNumber + 1);
-  // const url = `https://robohash.org/${randomNumber}?&size=200x200`;
 
   return (
     <>
@@ -187,7 +171,7 @@ const EditTeam = () => {
             {liverpoolTeam.map((item) => {
               return (
                 <tr
-                  onClick={() => chooePlayer(item.id)}
+                  onClick={() => chooePlayerClick(item.id)}
                   className={
                     item.isSelected ? "selected anotherclass" : "anotherclass"
                   }
@@ -203,128 +187,7 @@ const EditTeam = () => {
         </div>
       </div>
     </>
-    // "text-center hover:bg-red-200 cursor-pointer"
-    /* {
-        <h1 className="mt-4 w-[60rem] ml-20 border-b-2 border-red-600 text-2xl mb-4">
-          GOALKEEPERS
-        </h1>
-      }
-
-      <div className="grid grid-cols-3 w-[63rem]">
-        {liverpoolTeam
-          .filter((item) => item.position?.includes("Goalkeeper"))
-          .map((item, index) => {
-            // console.log(item);
-            return (
-              <div
-                onClick={() => chooePlayer(item.id)}
-                className="  mb-4 ml-20 mt-4 w-[16rem] "
-              >
-                <div className="flex bg-gray-100 w-[18rem] changeWidth ">
-                  <img className="w-20" src={item.img} />
-                  <div className="rectangle relative">
-                    <span className="text-white absolute top-6 left-2	">
-                      {item.number}
-                    </span>
-                  </div>
-                  <b>
-                    <h1 className="mt-6 ml-2 changeTextColor">{item.name}</h1>
-                  </b>
-                </div>
-              </div>
-            );
-          })}
-      </div>
-
-      {
-        <h1 className="mt-4 w-[60rem] ml-20 border-b-2 border-red-600 text-2xl mb-4">
-          DEFENDERS
-        </h1>
-      }
-      <div className="grid grid-cols-3 w-[63rem]">
-        {liverpoolTeam
-          .filter((item) => item.position?.includes("Defender"))
-          .map((item, index) => {
-            return (
-              <div onClick={() => chooePlayer(item.id)} className=" flex ml-20 mt-4 w-[18rem] ">
-                <div className="flex bg-gray-100 w-[18rem] changeWidth ">
-                  <img className="w-20" src={item.img} />
-                  <div className="rectangle relative ">
-                    <span className="text-white absolute mt-4 top-2 left-2	">
-                      {item.number}
-                    </span>
-                  </div>
-                  <b>
-                    <div>
-                      <h1 className=" mt-6 ml-2 changeTextColor">
-                        {item.name}
-                      </h1>
-                    </div>
-                  </b>
-                </div>
-              </div>
-            );
-          })}
-      </div>
-
-      {
-        <div className="">
-          <h1 className=" mt-4 w-[60rem] ml-20 border-b-2 border-red-600 text-2xl mb-4">
-            MIDFIELDERS
-          </h1>
-        </div>
-      }
-      <div className="grid grid-cols-3 w-[63rem] ">
-        {liverpoolTeam
-          .filter((item) => item.position?.includes("Midfielder"))
-          .map((item, index) => {
-            return (
-              <div onClick={() => chooePlayer(item.id)} className=" ml-20 mt-4 w-[16rem] ">
-                <div className="flex bg-gray-100 w-[18rem] changeWidth ">
-                  <img className="w-20" src={item.img} />
-                  <div className="rectangle relative">
-                    <span className="text-white absolute top-6 left-2	">
-                      {item.number}
-                    </span>
-                  </div>
-                  <b>
-                    <h1 className="mt-6 ml-2 changeTextColor">{item.name}</h1>
-                  </b>
-                </div>
-              </div>
-            );
-          })}
-      </div>
-
-      {
-        <div className="">
-          <h1 className=" mt-4 w-[60rem] ml-20 border-b-2 border-red-600 text-2xl mb-4">
-            FORWARDS
-          </h1>
-        </div>
-      }
-
-      <div className="grid grid-cols-3 w-[63rem] ">
-        {liverpoolTeam
-          .filter((item) => item.position?.includes("Forward"))
-          .map((item, index) => {
-            return (
-              <div onClick={() => chooePlayer(item.id)} className=" ml-20 mt-4 w-[16rem] ">
-                <div className="flex bg-gray-100 w-[18rem] changeWidth ">
-                  <img className="w-20" src={item.img} />
-                  <div className="rectangle relative">
-                    <span className="text-white absolute top-6 left-2	">
-                      {item.number}
-                    </span>
-                  </div>
-                  <b>
-                    <h1 className="mt-6 ml-2 changeTextColor">{item.name}</h1>
-                  </b>
-                </div>
-              </div>
-            );
-          })}
-      </div> */
+    
   );
 };
 export default EditTeam;
