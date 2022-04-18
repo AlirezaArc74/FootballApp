@@ -54,25 +54,26 @@ const Players = () => {
               </div>
             );
           })}
+
+        <div className="  absolute top-[6rem] left-5 ml-[1rem] w-[0rem]  ">
+          <b>
+            <h1 className=" absolute top-[1rem]  w-[18rem] ml-[26rem] text-slate-100 ">
+              Select A Player To Read Details
+            </h1>
+            <Modal />
+          </b>
+        </div>
       </div>
 
-      <div className=" relative top-[-37rem] ml-6 ">
-        <b>
-          <h1 className=" absolute top-[1rem] ml-[26rem] text-slate-100 ">
-            Select A Player To Read Details
-          </h1>
-        </b>
-        <Modal />
-      </div>
       {showModal ? (
         <>
-          <div className="absolute top-[6rem] w-[32rem] h-[38rem] left-[19rem] bg-slate-900 opacity-80"></div>
-          <div className="absolute top-[6rem] w-[32rem] h-[38rem] left-[19rem] text-slate-400">
+          <div className="absolute top-[6rem] w-[32.5rem] h-[38rem] left-[19rem] bg-slate-700 "></div>
+          <div className="absolute top-[6rem] w-[32.5rem] h-[38rem] left-[19rem] text-slate-400">
             <img
               className="w-[10rem] h-[13rem] m-4 rounded-[100%] "
               src={currentPlayer?.img}
             />
-            <div className="absolute top-4 right-[0.5rem] leading-8 h-[16rem] over	">
+            <div className="absolute top-4 right-[0.5rem] leading-8 h-[16rem] 	">
               <b>
                 <h1 className="  text-[25px] "> {currentPlayer.name} </h1>
               </b>
@@ -80,10 +81,7 @@ const Players = () => {
               <ProgressBar />
             </div>
 
-            <div>
-              
-
-            </div>
+            <div></div>
 
             <div className="absolute top-[3.2rem] right-[8rem] leading-8 "></div>
           </div>

@@ -1,6 +1,6 @@
 const Modal = () => {
   return (
-    <div className=" ml-[18rem] border bg-slate-600   w-[31rem] h-[29.5rem]">
+    <div className=" ml-[18rem] border bg-slate-600  w-[31rem] h-[29.5rem]">
       <div className="flex">
         <div className="modal cirlce  ml-[2rem] mt-[4rem]"></div>
         <div className="mt-[5rem] ml-4 ">

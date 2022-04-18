@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import { useNavigate, useParams } from "react-router-dom";
 import PlayerCard from "../components/playerCard";
+import FieldSquad from "../components/FieldSquad";
 
 const TeamsId = () => {
   const {
@@ -155,7 +156,7 @@ const TeamsId = () => {
 
         {showPlayer ? <PlayerCard id={id} /> : null}
 
-        {fieldSquad ? <div> hello</div> : null}
+        {fieldSquad ? <FieldSquad id={id} /> : null}
       </div>
     </>
   );

@@ -267,3 +267,8 @@ table {
   25% {background-color: rgb(148 163 184)}
   50% {background-color: rgb(181, 200, 219)}
 }
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}

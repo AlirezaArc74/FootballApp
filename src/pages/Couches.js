@@ -51,6 +51,15 @@ const Couches = () => {
             );
           })}
 
+        <div className="absolute top-0  w-0 bg-red-400">
+          <b>
+            <h1 className=" absolute  top-[1.5rem] w-[18rem] ml-[26rem] text-slate-100 ">
+              Select A Team To Couch Details
+            </h1>
+          </b>
+          <Modal />
+        </div>
+
         {showCouch ? (
           <>
             <div className="absolute left-[18rem] border bg-slate-800 top-0 w-[31rem] h-[30rem]">
@@ -118,15 +127,6 @@ const Couches = () => {
             </div>
           </>
         ) : null}
-      </div>
-
-      <div className="">
-        <b>
-          <h1 className=" relative top-[3rem] ml-[26rem] text-slate-100 ">
-            Select A Team To Couch Details
-          </h1>
-        </b>
-        <Modal />
       </div>
 
       <div className="bg-slate-700 absolute  right-0 w-[20rem] top-[5.6rem] mr-2 h-[30rem] opacity-80 ">

@@ -13,6 +13,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { useNavigate } from "react-router-dom";
 import "charts.css";
 import Modal from "../components/Modal";
+import RadarChart from "../components/RadarChart";
 
 const Teams = () => {
   const { teams, findTeamById, chosenTeam, setChosenTeam, liverpoolTeam } =
@@ -20,30 +21,53 @@ const Teams = () => {
   const [searchInput, setSearchInput] = useState("");
   const [selectInput, setSelectInput] = useState("");
   const [showTeam, setShowTeam] = useState(false);
-  const [attack, setAttack] = useState()
+  const [attack, setAttack] = useState();
+  const [midfield, setMidfield] = useState();
+  const [defense, setDefense] = useState();
 
   const navigate = useNavigate();
-
-  const overAll = Math.trunc(
-    (chosenTeam?.attack + chosenTeam?.midfield + chosenTeam?.defense) / 3
-  );
 
   const clickToshowTeam = (id) => {
     const p = teams.findIndex((item) => item.id === id);
     setChosenTeam(teams[p]);
     setShowTeam(true);
+
+    setAttack(
+      liverpoolTeam
+        .filter((item) => item.teamId == id)
+        .map((item) => item.attack)
+    );
+
+    setMidfield(
+      liverpoolTeam
+        .filter((item) => item.teamId == id)
+        .map((item) => item.midfield)
+    );
+
+    setDefense(
+      liverpoolTeam
+        .filter((item) => item.teamId == id)
+        .map((item) => item.defense)
+    );
   };
+  console.log(attack, midfield, defense);
 
-  // {chosenTeam?.map(item => {
-  //   if(item?.position?.includes('Forward')) {
-  //     return console.log(item)
-  //   }
-  // })}
+  const attackSum = attack?.reduce((x, y) => (x + y) / 11);
+  const attackBar = Math.trunc(attackSum * 10);
+  console.log(attackBar);
 
-  console.log(chosenTeam);
+  const midfieldSum = midfield?.reduce((x, y) => (x + y) / 11);
+  console.log(midfieldSum);
+  const midfieldBar = Math.trunc(midfieldSum * 10);
+
+  const defenseSum = defense?.reduce((x, y) => (x + y) / 11);
+  console.log(defenseSum);
+  const defenseBar = Math.trunc(defenseSum * 10);
+
+  const overAll = Math.trunc((attackBar + midfieldBar + defenseBar) / 3);
+
   return (
     <>
-      {/* <div id="chartdiv" style={{ width: "100%", height: "500px" }}></div> */}
       <div className="absolute h-[37rem]   ">
         {teams
           .filter((item) => {
@@ -58,7 +82,7 @@ const Teams = () => {
             <div
               onClick={() => clickToshowTeam(item.id)}
               className=" top-5 text-[14px] text-slate-800 cursor-pointer
-             hover:bg-slate-100 flex bg-slate-300 w-[15rem] ml-4 mb-4 mt-4 round "
+             hover:bg-slate-100 flex bg-slate-400 w-[15rem] ml-4 mb-4 mt-4 round "
             >
               <img className="w-20" src={item.logoUrl} />
               <div className="m-4">
@@ -133,15 +157,15 @@ const Teams = () => {
                   <label>ATACK</label>
                 </b>
                 <b>
-                  <label> {chosenTeam.attack} </label>
+                  <label> {attackBar} </label>
                 </b>
               </div>
               <input
                 readOnly="true"
                 type="range"
-                value={chosenTeam.attack}
+                value={attackBar}
                 className="attackRange"
-                max="120"
+                max="100"
               />
 
               <div className="flex justify-between">
@@ -149,15 +173,15 @@ const Teams = () => {
                   <label>MIDFIELD</label>
                 </b>
                 <b>
-                  <label> {chosenTeam.midfield} </label>
+                  <label> {midfieldBar} </label>
                 </b>
               </div>
               <input
                 readOnly="true"
                 type="range"
-                value={chosenTeam.midfield}
+                value={midfieldBar}
                 className="midfieldRange"
-                max="120"
+                max="100"
               />
 
               <div className="flex justify-between">
@@ -165,18 +189,24 @@ const Teams = () => {
                   <label>DEFENSE</label>
                 </b>
                 <b>
-                  <label> {chosenTeam.defense} </label>
+                  <label> {defenseBar} </label>
                 </b>
               </div>
               <input
                 readOnly="true"
                 type="range"
-                value={chosenTeam.defense}
+                value={defenseBar}
                 className="defenseRange"
-                max="120"
+                max="100"
               />
               <h1> Overall: {overAll} </h1>
             </div>
+
+            {/* <RadarChart
+              attackBar={attackBar}
+              midfieldBar={midfieldBar}
+              defenseBar={defenseBar}
+            /> */}
           </div>
         </>
       ) : null}
